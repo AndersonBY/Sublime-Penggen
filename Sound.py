@@ -31,6 +31,7 @@ class EventSound(sublime_plugin.EventListener):
     def __init__(self, *args, **kwargs):
         super(EventSound, self).__init__(*args, **kwargs)
         self.play = getattr(self, sublime.platform() + "_play")
+        self.pre_size = {}
 
     @thread
     def osx_play(self, event_name):
@@ -74,6 +75,7 @@ class EventSound(sublime_plugin.EventListener):
 
     def on_new_async(self, view):
         # Called when a new buffer is created. Runs in a separate thread, and does not block the application.
+        self.pre_size[view.id()] = 0
         self._throttle(
             lambda: self.play("on_new"),
             sublime.load_settings(SETTING_NAME).get("min_span")
@@ -109,10 +111,19 @@ class EventSound(sublime_plugin.EventListener):
 
     def on_modified_async(self, view):
         # Called after changes have been made to a view. Runs in a separate thread, and does not block the application.
-        self._throttle(
-            lambda: self.play("on_modify"),
-            sublime.load_settings(SETTING_NAME).get("min_span")
-        )
+
+        #only run when not deleting
+        if view.size() > self.pre_size[view.id()]:
+            self.pre_size[view.id()] = view.size()
+            selected = view.substr(view.sel()[0].a-1)
+            sublime.status_message(selected)
+
+            #press enter
+            if ord(selected) == 10:
+                self._throttle(
+                    lambda: self.play("on_modify"),
+                    sublime.load_settings(SETTING_NAME).get("min_span")
+                )
 
     def _throttle(self, func, time):
         # Creates a function that, when executed, will only call the func function at most once per every time milliseconds.
