@@ -1,5 +1,5 @@
 一个Sublime-Text的捧哏插件，让你在写代码时也有人给你捧哏。
-Fun :smile:
+
 由[Sublime-Sound](https://github.com/airtoxin/Sublime-Sound)改造而来
 
 __支持平台__
