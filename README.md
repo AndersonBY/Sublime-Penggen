@@ -1,9 +1,8 @@
-# Sublime-Sound ![ST2](https://img.shields.io/badge/Sublime%20Text-build 2091-orange.svg) ![ST3](https://img.shields.io/badge/Sublime%20Text-build 3083-blue.svg)
-
-Sublime-Text plugin to play event sounds.
+一个Sublime-Text的捧哏插件，让你在写代码时也有人给你捧哏。
 Fun :smile:
+由[Sublime-Sound](https://github.com/airtoxin/Sublime-Sound)改造而来
 
-__Supported Platforms__
+__支持平台__
 
 ||osx|linux|windows|
 |:----:|:----:|:----:|:----:|
@@ -12,11 +11,9 @@ __Supported Platforms__
 
 If you use ST2 Build 2091(29 July 2011) or more newer one, we cannot play any sounds because of its change of threading policy.:cry:
 
-## Installation
+## 安装
 
-You can install from [Package Control](https://sublime.wbond.net/).
-
-__Package Control: Install Package__ > Select __Sound__
+将代码拷贝至Sublime-Text的Packages目录下
 
 ## Event Lists
 
